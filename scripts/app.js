@@ -6,7 +6,7 @@ class Currency {
         this.image = image;
     }
     get imageUrl() {
-        return `http://web.poecdn.com/image/Art/2DItems/Currency/${this.image}.png?scale=1&w=1&h=1`;
+        return `https://web.poecdn.com/image/Art/2DItems/Currency/${this.image}.png?scale=1&w=1&h=1`;
     }
     toOption() {
         return $('<option>')
