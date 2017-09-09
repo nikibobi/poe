@@ -1,0 +1,25 @@
+{
+  "name": "poe",
+  "version": "1.0.0",
+  "description": "Path of Exile utility site",
+  "private": true,
+  "main": "index.html",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nikibobi/poe.git"
+  },
+  "author": "bosak",
+  "license": "MIT",
+  "scripts": {
+    "start": "npm run typescript && npm run browser",
+    "browser": "xdg-open index.html",
+    "typescript": "tsc"
+  },
+  "bugs": {
+    "url": "https://github.com/nikibobi/poe/issues"
+  },
+  "homepage": "https://nikibobi.github.com/poe",
+  "dependencies": {
+    "@types/jquery": "^3.2.12"
+  }
+}
