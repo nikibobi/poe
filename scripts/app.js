@@ -63,7 +63,7 @@ class CurrencyAmount {
         return this.amount * this.rate;
     }
     set chaos(value) {
-        this.amount = Math.floor(value / this.rate);
+        this.amount = Math.ceil(value / this.rate);
     }
     next() {
         this.amount += 1;
@@ -93,24 +93,25 @@ function fillSelectOptions(selector) {
     select.attr('size', currencies.length);
     select.change(function () {
         const aliases = $(this).val();
-        const end = 100;
+        const range = [0, 100];
         buildAmmounts(aliases);
-        fillTableRows('#currencies', end);
+        fillTableRows('#currencies', range);
     }).change();
 }
-function fillTableRows(selector, end) {
+function fillTableRows(selector, range) {
     const tbody = $(selector).children('tbody');
     tbody.empty();
     let rows = [];
-    let chaos = 0;
-    while (chaos <= end) {
-        let min = amounts.map(a => a.chaos).reduce((a, b) => Math.min(a, b));
+    let [start, end] = range;
+    amounts.forEach(a => a.chaos = start);
+    while (true) {
+        let min = Math.min(...amounts.map(a => a.chaos));
+        if (min > end)
+            break;
         let amount = amounts.find(a => a.chaos == min);
         rows.push(amount.toRow());
-        chaos = amount.chaos;
         amount.next();
     }
-    rows.pop();
     rows.forEach(row => row.appendTo(tbody));
 }
 $(function () {
