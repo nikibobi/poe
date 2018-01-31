@@ -103,7 +103,9 @@ function fillTableRows(selector, range) {
     tbody.empty();
     let rows = [];
     let [start, end] = range;
-    amounts.forEach(a => a.chaos = start);
+    if (start !== 0) {
+        amounts.forEach(a => a.chaos = start);
+    }
     while (true) {
         let min = Math.min(...amounts.map(a => a.chaos));
         if (min > end)

@@ -128,7 +128,9 @@ function fillTableRows(selector: string, range: [number, number]) {
     let rows: JQuery<HTMLElement>[] = [];
     
     let [start, end] = range;
-    amounts.forEach(a => a.chaos = start);
+    if (start !== 0) {
+        amounts.forEach(a => a.chaos = start);
+    }
     while (true) {
         let min = Math.min(...amounts.map(a => a.chaos));
         if (min > end)
