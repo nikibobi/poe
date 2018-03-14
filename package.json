@@ -13,7 +13,7 @@
   "scripts": {
     "start": "npm run typescript && npm run browser",
     "browser": "xdg-open index.html",
-    "typescript": "tsc"
+    "typescript": "tsc --project scripts/"
   },
   "bugs": {
     "url": "https://github.com/nikibobi/poe/issues"
