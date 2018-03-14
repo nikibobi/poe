@@ -93,15 +93,15 @@ function fillSelectOptions(selector) {
     select.attr('size', currencies.length);
     select.change(function () {
         const aliases = $(this).val();
-        const range = [0, 100];
         buildAmmounts(aliases);
-        fillTableRows('#currencies', range);
+        populateTable();
     }).change();
 }
-function fillTableRows(selector, range) {
-    const tbody = $(selector).children('tbody');
+const table = '#currencies';
+let range = [0, 1];
+function populateTable() {
+    const tbody = $(table).children('tbody');
     tbody.empty();
-    let rows = [];
     let [start, end] = range;
     if (start !== 0) {
         amounts.forEach(a => a.chaos = start);
@@ -111,12 +111,28 @@ function fillTableRows(selector, range) {
         if (min > end)
             break;
         let amount = amounts.find(a => a.chaos == min);
-        rows.push(amount.toRow());
+        amount.toRow().appendTo(tbody);
         amount.next();
     }
-    rows.forEach(row => row.appendTo(tbody));
 }
 $(function () {
     fillSelectOptions('#include');
+    $('#value, #delta').change(function () {
+        const value = parseFloat($('#value').val());
+        const delta = parseFloat($('#delta').val());
+        range = [Math.max(value - delta, 0), value + delta];
+        populateTable();
+    });
+    $('#from, #to').change(function () {
+        const from = parseFloat($('#from').val());
+        const to = parseFloat($('#to').val());
+        if (from < to) {
+            range = [from, to];
+        }
+        else {
+            range = [to, from];
+        }
+        populateTable();
+    });
 });
 //# sourceMappingURL=app.js.map

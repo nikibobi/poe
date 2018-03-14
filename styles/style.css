@@ -7,6 +7,7 @@
     margin: 0;
     padding: 0;
     font-family: Fontin, sans-serif;
+    box-sizing: border-box;
 }
 
 body {
@@ -20,11 +21,16 @@ body {
 /* layout */
 
 aside {
-    padding: 0 10px;
+    padding: 10px;
     position: fixed;
     height: 100%;
     background-color: rgba(50, 50, 50, 0.5);
     border-right: 1px solid #444;
+}
+
+aside > * {
+    display: block;
+    margin-top: 6px;
 }
 
 section {
@@ -40,7 +46,6 @@ section {
 select {
     /* removes scrollbar */
     overflow-y: hidden;
-    margin-top: 16px;
     background-color: #444;
     color: inherit;
 }
@@ -50,6 +55,29 @@ option {
     background-repeat: no-repeat;
     background-size: contain;
     padding: 2px;
+}
+
+/* input */
+
+input {
+    color: inherit;
+    background-color: #222;
+    border: 1px solid #444;
+}
+
+.group {
+    width: 164px;
+    text-align: center;
+}
+
+input[type=number] {
+    width: 45%;
+}
+
+.gap {
+    font-family: sans-serif;
+    display: inline-block;
+    width: 10%;
 }
 
 /* table */
