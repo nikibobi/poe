@@ -11,6 +11,11 @@ export default class App extends Vue {}
 </script>
 
 <style>
+@font-face {
+    font-family: Fontin;
+    src: url(~@/assets/fonts/Fontin-SmallCaps.ttf);
+}
+
 * {
     margin: 0;
     padding: 0;
