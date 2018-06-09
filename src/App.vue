@@ -1,12 +1,18 @@
 <template>
   <div id="app">
+    <GithubRibbon username="nikibobi" project="poe" orientation="right" color="white_ffffff"/>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import GithubRibbon from './components/GithubRibbon.vue';
 
-@Component
+@Component({
+  components: {
+    GithubRibbon
+  }
+})
 export default class App extends Vue {}
 </script>
 
