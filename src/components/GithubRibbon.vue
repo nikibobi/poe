@@ -7,13 +7,22 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 
+const palete = {
+    red: "aa0000",
+    green: "007200",
+    darkblue: "121621",
+    orange: "ff7600",
+    gray: "6d6d6d",
+    white: "ffffff"
+}
+
 // https://blog.github.com/2008-12-19-github-ribbons
 @Component
 export default class GitHubRibbon extends Vue {
   @Prop() username!: string;
   @Prop({ default: null }) project!: string;
   @Prop({ default: "left" }) orientation!: "left" | "right";
-  @Prop() color!: string;
+  @Prop({ default: "red" }) color!: "red" | "green" | "darkblue" | "orange" | "gray" | "white";
 
   get link() {
       let url = `https://github.com/${this.username}`;
@@ -24,7 +33,7 @@ export default class GitHubRibbon extends Vue {
   }
 
   get image() {
-      return `https://s3.amazonaws.com/github/ribbons/forkme_${this.orientation}_${this.color}.png`;
+      return `https://s3.amazonaws.com/github/ribbons/forkme_${this.orientation}_${this.color}_${palete[this.color]}.png`;
   }
 }
 </script>

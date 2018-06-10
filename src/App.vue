@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <GithubRibbon username="nikibobi" project="poe" orientation="right" color="white_ffffff"/>
+    <GithubRibbon username="nikibobi" project="poe" orientation="right" color="white"/>
   </div>
 </template>
 
