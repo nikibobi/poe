@@ -1,13 +1,118 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@font-face {
+  font-family: Fontin;
+  src: url(../fonts/Fontin-SmallCaps.ttf);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Fontin, sans-serif;
+  box-sizing: border-box;
+}
+
+body {
+  background-image: url('https://web.poecdn.com/gen/image/YTozOntpOjA7aTowO2k6/MjthOjI6e3M6MjoiaWQi/O2k6OTE3O3M6NDoic2l6/ZSI7czo0OiJvcmlnIjt9/aToxO2k6NDt9/8d591da8f8/Act5.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  color: #fff;
+}
+
+/* layout */
+
+aside {
+  padding: 10px;
+  position: fixed;
+  height: 100%;
+  background-color: rgba(50, 50, 50, 0.5);
+  border-right: 1px solid #444;
+}
+
+aside > * {
+  display: block;
+  margin-top: 6px;
+}
+
+section {
+  padding: 30px 0 30px 185px;
+  flex: 1;
+  display: flex;
+  min-height: 100%;
+  justify-content: center;
+}
+
+/* select */
+
+select {
+  /* removes scrollbar */
+  overflow-y: hidden;
+  background-color: #444;
+  color: inherit;
+}
+
+option {
+  text-indent: 20px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  padding: 2px;
+}
+
+/* input */
+
+input {
+  color: inherit;
+  background-color: #222;
+  border: 1px solid #444;
+}
+
+.group {
+  width: 164px;
+  text-align: center;
+}
+
+input[type=number] {
+  width: 45%;
+}
+
+.gap {
+  font-family: sans-serif;
+  display: inline-block;
+  width: 10%;
+}
+
+/* table */
+
+table {
+  border-collapse: collapse;
+  border: 2px solid #222;
+}
+
+thead:first-child > tr th {
+  background: #555;
+}
+
+tr:nth-of-type(odd) {
+  background-color: #333;
+}
+
+tr:nth-of-type(even) {
+  background-color: #555
+}
+
+tr:hover {
+  background-color: #777;
+}
+
+th {
+  font-weight: bold;
+  vertical-align: center;
+}
+
+td, th {
+  padding: 2px 8px;
+  border-right: 1px solid #444;
+}
+
+td img {
+  max-height: 1em;
 }
