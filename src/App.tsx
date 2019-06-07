@@ -1,13 +1,13 @@
 import React from 'react';
 import './App.css';
 import CurrencyTable from './components/CurrencyTable';
-import CurrencyPicker from './components/CurrencyPicker';
+import CurrencyFilter from './components/CurrencyFilter';
 
 const App: React.FC = () => {
     return (
         <React.Fragment>
         <aside>
-            <CurrencyPicker />
+            <CurrencyFilter />
         </aside>
         <section>
             <CurrencyTable />
