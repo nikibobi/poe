@@ -4,6 +4,7 @@ import { IRangeProps, IRangeState } from '../data/ranges';
 export interface IValueDeltaInputProps {
     value: IRangeProps
     delta: IRangeProps
+    baseAlias: string
 }
 
 export default class ValueDeltaInput extends React.Component<IValueDeltaInputProps, IRangeState> {
@@ -44,7 +45,7 @@ export default class ValueDeltaInput extends React.Component<IValueDeltaInputPro
     public render() {
         return (
             <div className="group">
-                <input type="number" value={this.value} onChange={this.handleChange} id="value" placeholder="chaos" {...this.props.value} />
+                <input type="number" value={this.value} onChange={this.handleChange} id="value" placeholder={this.props.baseAlias} {...this.props.value} />
                 <span className="gap">&plusmn;</span>
                 <input type="number" value={this.delta} onChange={this.handleChange} id="delta" placeholder="delta" {...this.props.delta} />
             </div>
