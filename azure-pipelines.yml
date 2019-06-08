@@ -6,6 +6,9 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
+variables:
+- group: 'Github Token'
+
 steps:
 - checkout: self
   persistCredentials: 'true'
