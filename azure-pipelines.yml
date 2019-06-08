@@ -15,7 +15,7 @@ steps:
 - script: npm install
   displayName: 'Install Dependencies'
 
-- script: npm test
+- script: npm run test:ci
   displayName: 'Run Tests'
 
 - script: npm run deploy
