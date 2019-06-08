@@ -1,27 +1,24 @@
 import React from 'react';
-import { IRangeProps, IRangeState } from '../data/ranges';
+import { IRangeProps } from '../data/ranges';
 
 export interface IValueDeltaInputProps {
     value: IRangeProps
     delta: IRangeProps
     baseAlias: string
+    range: [number, number]
+    onChange: (range: [number, number]) => void
 }
 
-export default class ValueDeltaInput extends React.Component<IValueDeltaInputProps, IRangeState> {
-
-    constructor(props: IValueDeltaInputProps) {
-        super(props);
-        this.state = { range: [this.props.value.min, this.props.value.min] };
-    }
+export default class ValueDeltaInput extends React.Component<IValueDeltaInputProps> {
 
     public get value(): number {
-        const { range: [from, to] } = this.state;
+        const { range: [from, to] } = this.props;
         const value = (from + to) / 2;
         return value;
     }
 
     public get delta(): number {
-        const { range: [from, to] } = this.state;
+        const { range: [from, to] } = this.props;
         const delta = (to - from) / 2;
         return delta;
     }
@@ -39,7 +36,7 @@ export default class ValueDeltaInput extends React.Component<IValueDeltaInputPro
 
     private changeState(value: number, delta: number) {
         const range: [number, number] = [value - delta, value + delta];
-        this.setState({ range });
+        this.props.onChange(range);
     }
 
     public render() {

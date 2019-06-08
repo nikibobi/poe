@@ -1,25 +1,22 @@
 import React from 'react';
-import { IRangeProps, IRangeState } from '../data/ranges';
+import { IRangeProps } from '../data/ranges';
 
 export interface IFromToInputProps {
     from: IRangeProps
     to: IRangeProps
+    range: [number, number]
+    onChange: (range: [number, number]) => void
 }
 
-export default class FromToInput extends React.Component<IFromToInputProps, IRangeState> {
-
-    constructor(props: IFromToInputProps) {
-        super(props);
-        this.state = { range: [props.from.min, props.to.min] };
-    }
+export default class FromToInput extends React.Component<IFromToInputProps> {
 
     public get from(): number {
-        const [from, ] = this.state.range;
+        const [from, ] = this.props.range;
         return from;
     }
 
     public get to(): number {
-        const [, to] = this.state.range;
+        const [, to] = this.props.range;
         return to;
     }
 
@@ -31,7 +28,7 @@ export default class FromToInput extends React.Component<IFromToInputProps, IRan
         } else if (event.target.id === 'to') {
             to = event.target.valueAsNumber;
         }
-        this.setState({ range: [from, to] })
+        this.props.onChange([from, to]);
     }
 
     public render() {
