@@ -7,7 +7,6 @@ import CurrencySelect from './components/CurrencySelect';
 import FromToInput from './components/FromToInput';
 import ValueDeltaInput from './components/ValueDeltaInput';
 import CurrencyTable from './components/CurrencyTable';
-import './App.css';
 
 interface IAppState {
     selected: Currency[]
