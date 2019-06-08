@@ -7,13 +7,17 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
+- checkout: self
+  persistCredentials: 'true'
+
 - task: NodeTool@0
   inputs:
     versionSpec: '10.x'
   displayName: 'Install Node.js'
 
-- script: npm install
-  displayName: 'Install Dependencies'
-
-- script: npm run deploy
+- script: |
+    git config user.email "bosakmaw@gmail.com" 
+    git config user.name "Borislav Kosharov"
+    npm install
+    npm run deploy -- -r https://$(github_token)@github.com/nikibobi/poe.git
   displayName: 'Deploy to Github Pages'
