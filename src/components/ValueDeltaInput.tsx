@@ -9,43 +9,27 @@ export interface IValueDeltaInputProps {
     onChange: (range: [number, number]) => void
 }
 
-export default class ValueDeltaInput extends React.Component<IValueDeltaInputProps> {
+export default function ValueDeltaInput(props: IValueDeltaInputProps) {
 
-    public get value(): number {
-        const { range: [from, to] } = this.props;
-        const value = (from + to) / 2;
-        return value;
-    }
+    const { range: [from, to] } = props;
+    let value = (from + to) / 2;
+    let delta = (to - from) / 2;
 
-    public get delta(): number {
-        const { range: [from, to] } = this.props;
-        const delta = (to - from) / 2;
-        return delta;
-    }
-
-    public handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        let value = this.value;
-        let delta = this.delta;
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.id === 'value') {
             value = event.target.valueAsNumber;
         } else if (event.target.id === 'delta') {
             delta = event.target.valueAsNumber;
         }
-        this.changeState(value, delta);
-    }
-
-    private changeState(value: number, delta: number) {
         const range: [number, number] = [value - delta, value + delta];
-        this.props.onChange(range);
+        props.onChange(range);
     }
 
-    public render() {
-        return (
-            <div className="group">
-                <input type="number" value={this.value} onChange={this.handleChange} id="value" placeholder={this.props.baseAlias} {...this.props.value} />
-                <span className="gap">&plusmn;</span>
-                <input type="number" value={this.delta} onChange={this.handleChange} id="delta" placeholder="delta" {...this.props.delta} />
-            </div>
-        );
-    }
+    return (
+        <div className="group">
+            <input type="number" value={value} onChange={handleChange} id="value" placeholder={props.baseAlias} {...props.value} />
+            <span className="gap">&plusmn;</span>
+            <input type="number" value={delta} onChange={handleChange} id="delta" placeholder="delta" {...props.delta} />
+        </div>
+    );
 }

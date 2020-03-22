@@ -4,7 +4,7 @@ import { Currency } from '../models/Currency';
 import { CurrencyAmount } from '../models/CurrencyAmount';
 import { CurrencyValue, ICurrencyValue } from '../models/CurrencyValue';
 
-const CurrencyTableCell: React.FC<ICurrencyValue> = (props) => {
+function CurrencyTableCell(props: ICurrencyValue) {
     return (
         <td>{props.value} {props.currency.toImg()} {props.currency.name}</td>
     );
@@ -15,7 +15,7 @@ interface ICurrencyTableRowProps {
     value: CurrencyValue,
 }
 
-const CurrencyTableRow: React.FC<ICurrencyTableRowProps> = (props) => {
+function CurrencyTableRow(props: ICurrencyTableRowProps) {
     return (
         <tr key={`${props.value.currency.alias}-${props.value.value}`}>
             <CurrencyTableCell value={props.base.value.toFixed(2)} currency={props.base.currency}/>
@@ -31,47 +31,40 @@ export interface ICurrencyTableProps {
     rates: Map<string, number>
 }
 
-export interface ICurrencyTableState {
-    amounts: ICurrencyTableRowProps[]
+function *generateRows(props: ICurrencyTableProps): IterableIterator<ICurrencyTableRowProps> {
+    const base = props.base;
+    const [start, end] = props.range;
+    const amounts = props.selected.map(currency =>
+        new CurrencyAmount(currency, base, props.rates.get(currency.alias) as number));
+    if (start !== 0) {
+        amounts.forEach(a => a.chaos = start);
+    }
+
+    const heap = Heap.from(amounts, CurrencyAmount.comparator);
+    while (true) {
+        const amount = heap.pop() as CurrencyAmount;
+
+        if (amount.chaos > end)
+            break;
+
+        yield {
+            base: amount.toBaseValue(),
+            value: amount.toValue(),
+        };
+        amount.next();
+        heap.push(amount);
+    }
 }
 
-export default class CurrencyTable extends React.Component<ICurrencyTableProps> {
-
-    *renderRows(): IterableIterator<ICurrencyTableRowProps> {
-        const base = this.props.base;
-        const [start, end] = this.props.range;
-        const amounts = this.props.selected.map(currency =>
-            new CurrencyAmount(currency, base, this.props.rates.get(currency.alias) as number));
-        if (start !== 0) {
-            amounts.forEach(a => a.chaos = start);
-        }
-
-        const heap = Heap.from(amounts, CurrencyAmount.comparator);
-        while (true) {
-            const amount = heap.pop() as CurrencyAmount;
-
-            if (amount.chaos > end)
-                break;
-
-            yield {
-                base: amount.toBaseValue(),
-                value: amount.toValue(),
-            };
-            amount.next();
-            heap.push(amount);
-        }
-    }
-
-    render() {
-        return (
-            <table id="currencies">
-                <thead>
-                    <tr><th>Chaos</th><th>Currency</th></tr>
-                </thead>
-                <tbody>
-                    {Array.from(this.renderRows(), props => <CurrencyTableRow {...props}/>)}
-                </tbody>
-            </table>
-        );
-    }
+export default function CurrencyTable(props: ICurrencyTableProps) {
+    return (
+        <table id="currencies">
+            <thead>
+                <tr><th>Chaos</th><th>Currency</th></tr>
+            </thead>
+            <tbody>
+                {Array.from(generateRows(props), props => <CurrencyTableRow {...props}/>)}
+            </tbody>
+        </table>
+    );
 }

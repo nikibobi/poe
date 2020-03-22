@@ -8,36 +8,24 @@ export interface IFromToInputProps {
     onChange: (range: [number, number]) => void
 }
 
-export default class FromToInput extends React.Component<IFromToInputProps> {
+export default function FromToInput(props: IFromToInputProps) {
 
-    public get from(): number {
-        const [from, ] = this.props.range;
-        return from;
-    }
+    let [from, to] = props.range;
 
-    public get to(): number {
-        const [, to] = this.props.range;
-        return to;
-    }
-
-    public handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        let from = this.from;
-        let to = this.to;
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.id === 'from') {
             from = event.target.valueAsNumber;
         } else if (event.target.id === 'to') {
             to = event.target.valueAsNumber;
         }
-        this.props.onChange([from, to]);
+        props.onChange([from, to]);
     }
 
-    public render() {
-        return (
-            <div className="group">
-                <input type="number" value={this.from} onChange={this.handleChange} id="from" placeholder="from" {...this.props.from} />
-                <span className="gap">&divide;</span>
-                <input type="number" value={this.to} onChange={this.handleChange} id="to" placeholder="to" {...this.props.to} />
-            </div>
-        );
-    }
+    return (
+        <div className="group">
+            <input type="number" value={from} onChange={handleChange} id="from" placeholder="from" {...props.from} />
+            <span className="gap">&divide;</span>
+            <input type="number" value={to} onChange={handleChange} id="to" placeholder="to" {...props.to} />
+        </div>
+    );
 }
