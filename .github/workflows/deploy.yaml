@@ -23,7 +23,9 @@ jobs:
       env:
         CI: true
     - name: Deploy to Github Pages
-      run: |
-        git config user.email "bosakmaw@gmail.com"
-        git config user.name "Borislav Kosharov"
-        npm run deploy -- -r https://${{github.token}}@github.com/${{github.repository}}.git
+      uses: crazy-max/ghaction-github-pages@v1
+      with:
+        target_branch: master
+        build_dir: build
+      env:
+        GITHUB_PAT: ${{ secrets.GITHUB_PAT }}
