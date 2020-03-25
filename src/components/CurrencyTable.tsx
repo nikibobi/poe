@@ -63,7 +63,7 @@ export default function CurrencyTable(props: ICurrencyTableProps) {
                 <tr><th>Chaos</th><th>Currency</th></tr>
             </thead>
             <tbody>
-                {Array.from(generateRows(props), props => <CurrencyTableRow {...props}/>)}
+                {Array.from(generateRows(props), (props, key) => <CurrencyTableRow key={key} {...props}/>)}
             </tbody>
         </table>
     );
