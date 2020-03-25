@@ -20,5 +20,7 @@ jobs:
       run: npm run build
     - name: Test
       run: npm test
+      env:
+        CI: true
     - name: Deploy to Github Pages
       run: npm run deploy -- -r https://${{github.token}}@github.com/${{github.repository}}.git
