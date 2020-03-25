@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import GithubCorner from 'react-github-corner';
 import { IRangeProps } from './data/ranges';
 import rates from './data/rates';
 import { Currency, currencies } from './models/Currency';
@@ -28,8 +29,9 @@ export default function App() {
             <FromToInput range={range} onChange={setRange} from={ranges.from} to={ranges.to}/>
         </aside>
         <section>
-            <CurrencyTable base={base} selected={selected} range={range} rates={rates} />
+            <CurrencyTable base={base} selected={selected} range={range} rates={rates}/>
         </section>
+        <GithubCorner href={'https://github.com/nikibobi/poe'} bannerColor="#fff" octoColor="#0b0207"/>
         </React.Fragment>
     );
 }
