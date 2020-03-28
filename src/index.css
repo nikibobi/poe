@@ -110,9 +110,13 @@ th {
 
 td, th {
   padding: 2px 8px;
+}
+
+td:not(:last-child), th:not(:last-child) {
   border-right: 1px solid #444;
 }
 
 td img {
   max-height: 1em;
+  vertical-align: middle;
 }
