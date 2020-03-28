@@ -10,4 +10,8 @@ export class CurrencyValue implements ICurrencyValue {
         public value: number,
         public currency: Currency,
     ) { }
+
+    toString(): string {
+        return `${this.value}${this.currency.alias}`;
+    }
 }

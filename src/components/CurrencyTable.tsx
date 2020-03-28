@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import { from } from 'rxjs';
+import { scan } from 'rxjs/operators';
 import Heap from 'mnemonist/heap';
 import { Currency } from '../models/Currency';
 import { CurrencyAmount } from '../models/CurrencyAmount';
@@ -57,13 +60,35 @@ function *generateRows(props: ICurrencyTableProps): IterableIterator<ICurrencyTa
 }
 
 export default function CurrencyTable(props: ICurrencyTableProps) {
+
+    const [rows, setRows] = useState([] as ICurrencyTableRowProps[]);
+
+    useEffect(() => {
+        const sub = from(generateRows(props)).pipe(
+            scan((rows, value) => [...rows, value], [] as ICurrencyTableRowProps[]),
+        ).subscribe(setRows, error => console.error(error));
+        return () => {
+            sub.unsubscribe();
+            setRows([]);
+        }
+    }, [props]);
+
     return (
         <table id="currencies">
             <thead>
                 <tr><th>Chaos</th><th>Currency</th></tr>
             </thead>
             <tbody>
-                {Array.from(generateRows(props), (props, key) => <CurrencyTableRow key={key} {...props}/>)}
+                <TransitionGroup component={null}>
+                    {rows.map(({ base, value }) => (
+                        <CSSTransition
+                            key={value.toString()}
+                            timeout={300}
+                            classNames="row">
+                                <CurrencyTableRow base={base} value={value}/>
+                        </CSSTransition>
+                    ))}
+                </TransitionGroup>
             </tbody>
         </table>
     );

@@ -120,3 +120,23 @@ td img {
   max-height: 1em;
   vertical-align: middle;
 }
+
+/* animations */
+
+.row-enter {
+  opacity: 0;
+}
+
+.row-enter-active {
+  opacity: 1;
+  transition: opacity 300ms ease-in;
+}
+
+.row-exit {
+  opacity: 1;
+}
+
+.row-exit-active {
+  opacity: 0;
+  transition: opacity 300ms ease-out;
+}
