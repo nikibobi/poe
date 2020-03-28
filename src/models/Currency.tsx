@@ -3,6 +3,8 @@ import currenciesArgs from '../data/currencyData';
 
 export class Currency {
 
+    static comparator = (a: Currency, b: Currency) => a.alias.localeCompare(b.alias);
+
     constructor(
         public alias: string,
         public name: string,

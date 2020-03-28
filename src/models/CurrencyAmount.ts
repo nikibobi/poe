@@ -3,7 +3,7 @@ import { CurrencyValue } from './CurrencyValue';
 
 export class CurrencyAmount {
 
-    static comparator = (a: CurrencyAmount, b: CurrencyAmount) => a.chaos - b.chaos;
+    static comparator = (a: CurrencyAmount, b: CurrencyAmount) => a.chaos - b.chaos || Currency.comparator(a.currency, b.currency);
 
     constructor(
         public currency: Currency,
