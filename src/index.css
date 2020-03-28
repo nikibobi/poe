@@ -121,6 +121,24 @@ td img {
   vertical-align: middle;
 }
 
+.copy-button {
+  cursor: pointer;
+  position: relative;
+}
+
+.copy-button .tooltip-text {
+  background-color: #555;
+  border: 1px solid #222;
+  color: #fff;
+  text-align: center;
+  border-radius: 4px;
+  padding: 2px 16px;
+  position: absolute;
+  z-index: 1;
+  left: 125%;
+  top: 0;
+}
+
 /* animations */
 
 .row-enter {
@@ -140,3 +158,25 @@ td img {
   opacity: 0;
   transition: opacity 300ms ease-out;
 }
+
+.tooltip-enter {
+  opacity: 0;
+  transform: translateY(10px) scale(0.8);
+}
+
+.tooltip-enter-active {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition: opacity 200ms, transform 200ms;
+}
+
+.tooltip-exit {
+  opacity: 1;
+}
+
+.tooltip-exit-active {
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 200ms, transform 200ms;
+}
+

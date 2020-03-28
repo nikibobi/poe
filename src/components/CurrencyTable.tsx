@@ -13,6 +13,34 @@ function CurrencyTableCell(props: ICurrencyValue) {
     );
 }
 
+interface ICopyButtonProps {
+    text: string;
+}
+
+function CopyButton(props: ICopyButtonProps) {
+
+    const [isClicked, setClicked] = useState(false);
+
+    const handleClick = async () => {
+        await navigator.clipboard.writeText(props.text);
+        setClicked(true);
+        setTimeout(() => setClicked(false), 1000);
+    }
+
+    return (
+        <td className="copy-button" onClick={handleClick}>
+            <span role="img" aria-label="Copy">📋</span>
+            <CSSTransition
+                in={isClicked}
+                timeout={200}
+                classNames="tooltip"
+                unmountOnExit>
+                <span className="tooltip-text">copied</span>
+            </CSSTransition>
+        </td>
+    );
+}
+
 interface ICurrencyTableRowProps {
     base: CurrencyValue,
     value: CurrencyValue,
@@ -23,6 +51,7 @@ function CurrencyTableRow(props: ICurrencyTableRowProps) {
         <tr key={`${props.value.currency.alias}-${props.value.value}`}>
             <CurrencyTableCell value={props.base.value.toFixed(2)} currency={props.base.currency}/>
             <CurrencyTableCell {...props.value}/>
+            <CopyButton text={props.value.toString()}/>
         </tr>
     );
 }
@@ -61,6 +90,8 @@ function *generateRows(props: ICurrencyTableProps): IterableIterator<ICurrencyTa
 
 export default function CurrencyTable(props: ICurrencyTableProps) {
 
+    const columns = ['Chaos', 'Currency', ''];
+
     const [rows, setRows] = useState([] as ICurrencyTableRowProps[]);
 
     useEffect(() => {
@@ -76,7 +107,7 @@ export default function CurrencyTable(props: ICurrencyTableProps) {
     return (
         <table id="currencies">
             <thead>
-                <tr><th>Chaos</th><th>Currency</th></tr>
+                <tr>{columns.map(column => (<th key={column}>{column}</th>))}</tr>
             </thead>
             <tbody>
                 <TransitionGroup component={null}>

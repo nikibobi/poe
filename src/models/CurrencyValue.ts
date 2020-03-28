@@ -12,6 +12,6 @@ export class CurrencyValue implements ICurrencyValue {
     ) { }
 
     toString(): string {
-        return `${this.value}${this.currency.alias}`;
+        return `${this.value} ${this.currency.alias}`;
     }
 }
