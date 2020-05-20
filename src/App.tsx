@@ -21,7 +21,7 @@ export default function App() {
     const [selected, setSelected] = useState(Array.from(currencies.values()));
     const [range, setRange] = useState([0, 1] as [number, number]);
 
-    const { isLoading, rates } = useGetRates({ user: 'nikibobi', league: 'Delirium' });
+    const { isLoading, rates } = useGetRates({ user: 'nikibobi' });
 
     return (
         <React.Fragment>

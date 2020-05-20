@@ -51,7 +51,7 @@ function CurrencyTableRow(props: ICurrencyTableRowProps) {
         <tr key={`${props.value.currency.alias}-${props.value.value}`}>
             <CurrencyTableCell value={props.base.value.toFixed(2)} currency={props.base.currency}/>
             <CurrencyTableCell {...props.value}/>
-            <CopyButton text={props.value.toString()}/>
+            <CopyButton text={`~price ${props.value.toString()}`}/>
         </tr>
     );
 }
