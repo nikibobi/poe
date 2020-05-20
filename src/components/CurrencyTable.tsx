@@ -57,17 +57,18 @@ function CurrencyTableRow(props: ICurrencyTableRowProps) {
 }
 
 export interface ICurrencyTableProps {
+    isLoading: boolean
     base: Currency
     selected: Currency[]
     range: [number, number]
-    rates: Map<string, number>
+    rates: { [s: string]: number }
 }
 
 function *generateRows(props: ICurrencyTableProps): IterableIterator<ICurrencyTableRowProps> {
     const base = props.base;
     const [start, end] = props.range;
     const amounts = props.selected.map(currency =>
-        new CurrencyAmount(currency, base, props.rates.get(currency.alias) as number));
+        new CurrencyAmount(currency, base, props.rates[currency.alias] as number));
     if (start !== 0) {
         amounts.forEach(a => a.chaos = start);
     }
@@ -109,6 +110,7 @@ export default function CurrencyTable(props: ICurrencyTableProps) {
             <thead>
                 <tr>{columns.map(column => (<th key={column}>{column}</th>))}</tr>
             </thead>
+            {!props.isLoading &&
             <tbody>
                 <TransitionGroup component={null}>
                     {rows.map(({ base, value }) => (
@@ -120,7 +122,7 @@ export default function CurrencyTable(props: ICurrencyTableProps) {
                         </CSSTransition>
                     ))}
                 </TransitionGroup>
-            </tbody>
+            </tbody>}
         </table>
     );
 }

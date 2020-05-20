@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import GithubCorner from 'react-github-corner';
-import { IRangeProps } from './data/ranges';
-import rates from './data/rates';
-import { Currency, currencies } from './models/Currency';
 import CurrencySelect from './components/CurrencySelect';
+import CurrencyTable from './components/CurrencyTable';
 import FromToInput from './components/FromToInput';
 import ValueDeltaInput from './components/ValueDeltaInput';
-import CurrencyTable from './components/CurrencyTable';
+import { IRangeProps } from './data/ranges';
+import { useGetRates } from './hooks/useGetRates';
+import { currencies, Currency } from './models/Currency';
 
 export default function App() {
 
@@ -21,6 +21,8 @@ export default function App() {
     const [selected, setSelected] = useState(Array.from(currencies.values()));
     const [range, setRange] = useState([0, 1] as [number, number]);
 
+    const { isLoading, rates } = useGetRates({ user: 'nikibobi', league: 'Delirium' });
+
     return (
         <React.Fragment>
         <aside>
@@ -29,7 +31,7 @@ export default function App() {
             <FromToInput range={range} onChange={setRange} from={ranges.from} to={ranges.to}/>
         </aside>
         <section>
-            <CurrencyTable base={base} selected={selected} range={range} rates={rates}/>
+            <CurrencyTable isLoading={isLoading} base={base} selected={selected} range={range} rates={rates}/>
         </section>
         <GithubCorner href={'https://github.com/nikibobi/poe'} bannerColor="#fff" octoColor="#0b0207"/>
         </React.Fragment>
