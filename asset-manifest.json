@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/poe/static/css/main.319e014e.chunk.css",
+    "main.js": "/poe/static/js/main.e684cfa8.chunk.js",
+    "main.js.map": "/poe/static/js/main.e684cfa8.chunk.js.map",
+    "runtime-main.js": "/poe/static/js/runtime-main.ba7f5f26.js",
+    "runtime-main.js.map": "/poe/static/js/runtime-main.ba7f5f26.js.map",
+    "static/js/2.190fbdc6.chunk.js": "/poe/static/js/2.190fbdc6.chunk.js",
+    "static/js/2.190fbdc6.chunk.js.map": "/poe/static/js/2.190fbdc6.chunk.js.map",
+    "index.html": "/poe/index.html",
+    "precache-manifest.ab514b65b9610f1934755d9438f67c99.js": "/poe/precache-manifest.ab514b65b9610f1934755d9438f67c99.js",
+    "service-worker.js": "/poe/service-worker.js",
+    "static/css/main.319e014e.chunk.css.map": "/poe/static/css/main.319e014e.chunk.css.map",
+    "static/js/2.190fbdc6.chunk.js.LICENSE.txt": "/poe/static/js/2.190fbdc6.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/poe/static/media/Fontin-SmallCaps.e09262c7.ttf"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.ba7f5f26.js",
+    "static/js/2.190fbdc6.chunk.js",
+    "static/css/main.319e014e.chunk.css",
+    "static/js/main.e684cfa8.chunk.js"
+  ]
+}
